@@ -20,7 +20,8 @@ The implementation is structured in three main stages:
 | Modality | Dataset | Source |
 |---|---|---|
 | Chest X-ray | Kermany et al. (2018) — 5,856 labeled images | [Mendeley Data](https://data.mendeley.com/datasets/rscbjbr9sj/2) |
-| Cough Audio | Liao et al. (2022) — 173 pediatric recordings | [(https://doi.org/10.6084/m9.figshare.21176197.v1)] |
+| Cough Audio | Liao et al. (2022) — 173 pediatric recordings | [Paper reference] |
+(https://doi.org/10.6084/m9.figshare.21176197.v1) |
 
 ---
 
@@ -29,26 +30,26 @@ The implementation is structured in three main stages:
 | Model | Accuracy | F1 Score | ROC-AUC |
 |---|---|---|---|
 | ResNet50 (X-ray only) | 0.8478 | 0.8868 | 0.9524 |
-| CNN-BiLSTM (Cough only) | 0.7403 | 0.7297 | 0.7459 |
+| CNN-BiLSTM (Cough only) | 0.7274 | 0.7522 | 0.7472 |
 | **Late Fusion** | **0.8773** | **0.9073** | 0.9389 |
 | Gated Fusion | 0.8707 | 0.9016 | 0.9284 |
 
 Late fusion with weighted averaging achieved the best overall performance, outperforming both unimodal baselines.
 
 ---
-
 ## Setup
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
-
-# Install dependencies
-pip install tensorflow keras librosa audiomentations scikit-learn numpy matplotlib
+https://github.com/thenukii/Multimodal-Deep-Learning-for-Pediatric-Pneumonia-Classification.git
+cd Multimodal-Deep-Learning-for-Pediatric-Pneumonia-Classification
 ```
 
-Then download the datasets, place them in the correct paths as referenced in each notebook, and run the notebooks in order.
+### ⚠️ Important: Path Configuration
+
+All notebooks were developed in **Google Colab** with Google Drive mounted. After cloning, you must update the file paths in each notebook before running.
+
+**In each notebook, find and replace the Drive paths**
 
 ---
 
