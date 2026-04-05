@@ -1,94 +1,59 @@
-# Multimodal-Deep-Learning-for-Pediatric-Pneumonia-Classification
-This repository contains the implementation of my Final Year Individual Research Project, which focuses on developing a multimodal deep learning system for pediatric pneumonia classification using chest X-ray images and cough sound recordings.
+# Multimodal Deep Learning for Pediatric Pneumonia Classification
+### Using Chest X-Rays and Cough Sounds
+This repository contains the implementation of a multimodal deep learning framework for pediatric pneumonia classification using chest X-ray images and cough sounds. The project combines visual and acoustic information to improve diagnostic performance compared to unimodal approaches.
 
 ---
 
-## 📌 Project Overview
+## Pipeline
 
-Pneumonia is one of the leading causes of mortality among children worldwide. Early and accurate diagnosis is critical for effective treatment. Traditional diagnosis methods rely heavily on radiological analysis and clinical expertise, which can be time-consuming and subjective.
+The implementation is structured in three main stages:
 
-This project proposes a multimodal deep learning framework that combines:
-
-- Chest X-ray images (structural information)
-- Cough sound recordings (acoustic and functional information)
-
-The goal is to investigate whether combining these two modalities improves classification performance compared to unimodal approaches.
+1. **X-ray Classification** — Transfer learning with ResNet50, MobileNet, DenseNet121, and VGG19 (ResNet50 selected as best)
+2. **Cough Sound Classification** — MFCC feature extraction + SVM, LSTM, BiLSTM, and CNN-BiLSTM models (CNN-BiLSTM selected as best)
+3. **Multimodal Fusion** — Late Fusion (weighted averaging) and Gated Fusion combining both modality outputs
 
 ---
-## 🎯 Objectives
+## Datasets
 
-- Develop a deep learning model for chest X-ray classification
-- Develop a deep learning model for cough sound classification
-- Design and implement multimodal fusion strategies
-- Compare unimodal and multimodal performance
+> ⚠️ Datasets and trained models are **not included** in this repository due to storage limits. Download them separately and place them in the appropriate directories before running the notebooks.
 
----
-
-## 🧠 Methodology
-
-The project is structured into three main stages:
-
-### 1. X-ray Classification
-- Models: ResNet50, DenseNet121, MobileNet, VGG19
-- Transfer learning with ImageNet pretrained weights
-- Image preprocessing and augmentation
-- Best model selected: **ResNet50**
+| Modality | Dataset | Source |
+|---|---|---|
+| Chest X-ray | Kermany et al. (2018) — 5,856 labeled images | [Mendeley Data](https://data.mendeley.com/datasets/rscbjbr9sj/2) |
+| Cough Audio | Liao et al. (2022) — 173 pediatric recordings | [(https://doi.org/10.6084/m9.figshare.21176197.v1)] |
 
 ---
 
-### 2. Cough Sound Classification
-- Feature extraction: MFCC + Delta + Delta-Delta
-- Models:
-  - SVM (baseline)
-  - LSTM
-  - BiLSTM
-  - CNN-BiLSTM
-- Best model selected: **CNN-BiLSTM**
+## Key Results
+
+| Model | Accuracy | F1 Score | ROC-AUC |
+|---|---|---|---|
+| ResNet50 (X-ray only) | 0.8478 | 0.8868 | 0.9524 |
+| CNN-BiLSTM (Cough only) | 0.7403 | 0.7297 | 0.7459 |
+| **Late Fusion** | **0.8773** | **0.9073** | 0.9389 |
+| Gated Fusion | 0.8707 | 0.9016 | 0.9284 |
+
+Late fusion with weighted averaging achieved the best overall performance, outperforming both unimodal baselines.
 
 ---
 
-### 3. Multimodal Fusion
-Two decision-level fusion strategies were implemented:
+## Setup
 
-#### 🔹 Late Fusion (Weighted Averaging)
-- Combines probabilities from both models
-- Optimal weights selected using validation data
+```bash
+# Clone the repository
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
 
-#### 🔹 Gated Fusion (Adaptive Fusion)
-- Learnable gating mechanism
-- Dynamically adjusts modality importance per sample
+# Install dependencies
+pip install tensorflow keras librosa audiomentations scikit-learn numpy matplotlib
+```
 
----
-
-## 📊 Evaluation Metrics
-
-The models were evaluated using:
-
-- Accuracy
-- Precision
-- Recall (Sensitivity)
-- F1 Score
-- ROC-AUC
-
-Threshold selection was performed using **Youden’s J statistic**.
+Then download the datasets, place them in the correct paths as referenced in each notebook, and run the notebooks in order.
 
 ---
 
-## 📈 Key Results
+## Notes
 
-- X-ray model achieved strong baseline performance
-- Cough model showed moderate performance due to dataset limitations
-- Multimodal fusion improved results over cough-only models
-- Late fusion achieved the best overall performance
-- Gated fusion achieved higher recall and AUC but lower accuracy
-
----
-
-## ⚠️ Dataset Notes
-
-- X-ray and cough datasets are from different sources
-- No patient-level alignment between modalities
-- Fusion was performed using class-based random pairing
-- Multi-seed evaluation was used to ensure robustness
-
----
+- Optimal classification thresholds are selected using **Youden's J Statistic** on validation data
+- Fusion evaluation uses a **20-seed multi-run strategy** to account for pseudo-pairing randomness
+- All ethical considerations followed; datasets are fully anonymised and publicly available
