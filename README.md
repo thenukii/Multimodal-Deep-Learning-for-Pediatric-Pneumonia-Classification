@@ -8,20 +8,24 @@ This repository contains the implementation of a multimodal deep learning framew
 
 The implementation is structured in three main stages:
 
-1. **X-ray Classification** — Transfer learning with ResNet50, MobileNet, DenseNet121, and VGG19 (ResNet50 selected as best)
-2. **Cough Sound Classification** — MFCC feature extraction + SVM, LSTM, BiLSTM, and CNN-BiLSTM models (CNN-BiLSTM selected as best)
-3. **Multimodal Fusion** — Late Fusion (weighted averaging) and Gated Fusion combining both modality outputs
+1. **X-ray Classification** — Transfer learning with ResNet50, MobileNet, DenseNet121, and VGG19  
+   *(ResNet50 selected as the best model)*  
+
+2. **Cough Sound Classification** — MFCC feature extraction with SVM, LSTM, BiLSTM, and CNN-BiLSTM  
+   *(CNN-BiLSTM selected as the best model)*  
+
+3. **Multimodal Fusion** — Late Fusion (weighted averaging) and Gated Fusion combining both modality outputs  
 
 ---
+
 ## Datasets
 
-> ⚠️ Datasets and trained models are **not included** in this repository due to storage limits. Download them separately and place them in the appropriate directories before running the notebooks.
+> ⚠️ Datasets and trained models are **not included** in this repository due to storage limitations. Please download them separately and update the file paths in the notebooks before running.
 
 | Modality | Dataset | Source |
 |---|---|---|
 | Chest X-ray | Kermany et al. (2018) — 5,856 labeled images | [Mendeley Data](https://data.mendeley.com/datasets/rscbjbr9sj/2) |
-| Cough Audio | Liao et al. (2022) — 173 pediatric recordings | [Paper reference] |
-(https://doi.org/10.6084/m9.figshare.21176197.v1) |
+| Cough Audio | Liao et al. (2022) — 173 pediatric recordings | [Paper reference](https://doi.org/10.6084/m9.figshare.21176197.v1) |
 
 ---
 
@@ -45,11 +49,9 @@ https://github.com/thenukii/Multimodal-Deep-Learning-for-Pediatric-Pneumonia-Cla
 cd Multimodal-Deep-Learning-for-Pediatric-Pneumonia-Classification
 ```
 
-### ⚠️ Important: Path Configuration
+### ⚠️ Path Configuration
 
-All notebooks were developed in **Google Colab** with Google Drive mounted. After cloning, you must update the file paths in each notebook before running.
-
-**In each notebook, find and replace the Drive paths**
+All notebooks were developed using Google Colab with Google Drive integration. After cloning the repository, update the dataset and model paths inside each notebook before running.
 
 ---
 
